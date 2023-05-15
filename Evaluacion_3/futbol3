@@ -130,3 +130,26 @@ Policies:
       USING ((finalized = true))
 create policy all_rows on facturas to venta using( true);
 
+create policy cant_delete_finalized on facturas as restrictive for delete to public using (finalized = false);
+
+select * from facturas
+;
+   id   | finalized |     venta_notes      |      details       
+--------+-----------+----------------------+--------------------
+ 202345 | t         | repeat customer      | {"details": "..."}
+ 202346 | t         | volume discount      | {"details": "..."}
+ 202347 | f         | call to be scheduled | {"details": "..."}
+(3 rows)
+
+futbol4=> delete from facturas;
+DELETE 1
+futbol4=> select * from facturas
+;
+   id   | finalized |   venta_notes   |      details       
+--------+-----------+-----------------+--------------------
+ 202345 | t         | repeat customer | {"details": "..."}
+ 202346 | t         | volume discount | {"details": "..."}
+(2 rows)
+
+
+
