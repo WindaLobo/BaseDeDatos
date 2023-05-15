@@ -105,3 +105,28 @@ futbol4=> select id,finalized,detailsv venta_notes
 alter table facturas enable row level security;
 ALTER TABLE
 acticva la segurida en nive  fila 
+
+select * from facturas;
+ id | finalized | venta_notes | details 
+----+-----------+-------------+---------
+
+
+create policy only_finalized on facturas to conta using(finalize = true);
+puede ver toda las columna y finalice tru 
+
+futbol4=# \d facturas
+                Table "public.facturas"
+   Column    |  Type   | Collation | Nullable | Default 
+-------------+---------+-----------+----------+---------
+ id          | integer |           | not null | 
+ finalized   | boolean |           | not null | false
+ venta_notes | text    |           |          | 
+ details     | jsonb   |           |          | 
+Indexes:
+    "facturas_pkey" PRIMARY KEY, btree (id)
+Policies:
+    POLICY "only_finalized"
+      TO conta
+      USING ((finalized = true))
+create policy all_rows on facturas to venta using( true);
+
