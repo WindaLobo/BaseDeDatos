@@ -720,3 +720,9 @@
   720  pg_restore -U postgres -C -d postgres  copiafutbol20c.dump
   721  psql futbol20 userfu;
   722  history > datosBaseDeDatos.txt;
+  723  creatdb -U postgres -T template0 futbol30 
+  724  createdb -U postgres -T template0 futbol30 
+  725  pg_restore -U postgres -d futbol30 copiafutbol20.dump
+  726  pg_restore -U postgres -d futbol30 copiafutbol20c.dump
+  727  psql futbol30 postgres;
+  728  history > datosBaseDeDatos.txt;
